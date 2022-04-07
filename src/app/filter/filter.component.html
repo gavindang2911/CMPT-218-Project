@@ -1,0 +1,97 @@
+<section style="position: fixed;">
+    <div>
+      <h2>Filters</h2>
+      <h3>Stat</h3>
+      <div>
+        <label for="new-cases">New Cases</label>
+        <input
+          type="checkbox"
+          id="new-cases"
+          name="cases"
+          [checked]="defaultFilter.cases"
+          (change)="onChange($event)"
+        />
+      </div>
+      <div>
+        <label for="cumulative-cases">Cumulative Cases</label>
+        <input
+          type="checkbox"
+          id="cumulative-cases"
+          name="cumulativeCases"
+          [checked]="defaultFilter.cumulativeCases"
+          (change)="onChange($event)"
+        />
+      </div>
+      <div>
+        <label for="new-deaths">New Deaths</label>
+        <input
+          type="checkbox"
+          id="new-deaths"
+          name="deaths"
+          [checked]="defaultFilter.deaths"
+          (change)="onChange($event)"
+        />
+      </div>
+      <div>
+        <label for="cumulative-deaths">Cumulative Deaths</label>
+        <input
+          type="checkbox"
+          id="cumulative-deaths"
+          name="cumulativeDeaths"
+          [checked]="defaultFilter.cumulativeDeaths"
+          (change)="onChange($event)"
+        />
+      </div>
+      <div>
+        <label for="new-recovered">New Recovered</label>
+        <input
+          type="checkbox"
+          id="new-recovered"
+          name="recovered"
+          [checked]="defaultFilter.recovered"
+          (change)="onChange($event)"
+        />
+      </div>
+      <div>
+        <label for="cumulative-recovered">Cumulative Recovered</label>
+        <input
+          type="checkbox"
+          id="cumulative-recovered"
+          name="cumulativeRecovered"
+          [checked]="defaultFilter.cumulativeRecovered"
+          (change)="onChange($event)"
+        />
+      </div>
+
+      <h3 class="text-indigo-400 text-xl">Location</h3>
+
+      <div>
+        <label for="federal">Federal</label>
+        <input type="checkbox" id="federal" name="federal"
+        [checked]="defaultFilter.federal"
+        (change)="onChange($event)"/>
+      </div>
+      <div >
+        <label for="provincial">Provincial</label>
+        <input type="checkbox" id="provincial" name="provincial" [disabled]="defaultFilter.federal"
+        [checked]="defaultFilter.provincial"
+          (change)="onChange($event)"
+        />
+      </div>
+      <div>
+        <label for="regional">Regional</label>
+        <input type="checkbox" id="regional" [disabled]="defaultFilter.federal"/>
+      </div>
+
+      <h3 class="text-indigo-400 text-xl">Time</h3>
+
+      <div>
+        <label for="start-date">Start Date</label>
+        <input type="date" id="start-date" name="startdate" (change)="onChange($event)"/>
+      </div>
+      <div>
+        <label for="end-date">End Date</label>
+        <input type="date" id="end-date" name="enddate" (change)="onChange($event)">
+      </div>
+    </div>
+  </section>
