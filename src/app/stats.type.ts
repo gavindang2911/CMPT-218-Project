@@ -1,10 +1,10 @@
 export type Stats = {
     cases: boolean;
-    cumulativeCases: boolean;
+    cumulative_cases: boolean;
     deaths: boolean;
-    cumulativeDeaths: boolean;
+    cumulative_deaths: boolean;
     recovered: boolean;
-    cumulativeRecovered: boolean;
+    cumulative_recovered: boolean;
     federal:boolean;
     provincial:boolean;
     startdate:string;
@@ -14,11 +14,11 @@ export type Stats = {
 
 const DEFAULT_FILTER: Stats = {
     cases: true,
-    cumulativeCases: false,
+    cumulative_cases: false,
     deaths: true,
-    cumulativeDeaths: false,
+    cumulative_deaths: false,
     recovered: true,
-    cumulativeRecovered: false,
+    cumulative_recovered: false,
     federal: false,
     provincial:true,
     startdate:'',

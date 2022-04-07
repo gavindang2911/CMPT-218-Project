@@ -1,32 +1,33 @@
-<nav class="navbar navbar-dark bg-dark mb-0">
+<nav class="navbar navbar-dark bg-dark" >
   <div class="container">
     <span class="navbar-brand">{{ title }}</span>
   </div>
 </nav>
 
-<!-- <body>
+<body >
 
-</body> -->
-
-
-<div class="p-5">
-  <div class="row">
-      <div class="col-md-3 p-5">
-        <app-filter
-        [defaultFilter] = "defaultFilter"
-        (onFilterChange) = "updateStats($event)"
-      ></app-filter>
-      </div>
-      <div class="col-md-6">
-        <h3>Time Period: {{dateDefault}} </h3>
-        <app-table
-        [defaultFilter] = "defaultFilter"
-        [dataDefault] = "dataDefault"
-        [dataFederal] = "dataFederal"
-        ></app-table>
-        <app-bar-chart
-        [defaultFilter] = "defaultFilter"
-        ></app-bar-chart>
-      </div>
+  <div class="p-5" >
+    <div class="row">
+        <div class="col-md-3 p-5">
+          <app-filter
+          [defaultFilter] = "defaultFilter"
+          (onFilterChange) = "updateStats($event)"
+        ></app-filter>
+        </div>
+        <div class="col-md-6">
+          <h3>Time Period: {{dateDefault}} </h3>
+          <app-table
+          [defaultFilter] = "defaultFilter"
+          [dataDefault] = "dataDefault"
+          [dataFederal] = "dataFederal"
+          ></app-table>
+          <app-bar-chart
+          [defaultFilter] = "defaultFilter"
+          [dataDefault] = "dataDefault"
+          [dataFederal] = "dataFederal"
+          ></app-bar-chart>
+        </div>
+    </div>
   </div>
-</div>
+</body>
+

@@ -27,7 +27,7 @@
                 class="sortable"
                 sortable="cumulative_cases"
                 (click)="sortedColumn = 'cumulative_cases'"
-                [hidden]="!defaultFilter.cumulativeCases"
+                [hidden]="!defaultFilter.cumulative_cases"
               >
                 Cumulative Cases&nbsp;<i class="fa fa-sort"></i>
               </th>
@@ -43,7 +43,7 @@
                 class="sortable"
                 sortable="cumulative_deaths"
                 (click)="sortedColumn = 'cumulative_deaths'"
-                [hidden]="!defaultFilter.cumulativeDeaths"
+                [hidden]="!defaultFilter.cumulative_deaths"
               >
                 Cumulative Deaths&nbsp;<i class="fa fa-sort"></i>
               </th>
@@ -59,7 +59,7 @@
                 class="sortable"
                 sortable="cumulative_recovered"
                 (click)="sortedColumn = 'cumulative_recovered'"
-                [hidden]="!defaultFilter.cumulativeRecovered"
+                [hidden]="!defaultFilter.cumulative_recovered"
               >
                 Cumulative Recovered&nbsp;<i class="fa fa-sort"></i>
               </th>
@@ -70,15 +70,15 @@
             <tr *ngFor="let data of dataDefault | sort: sortedColumn">
               <td>{{ data.province }}</td>
               <td [hidden]="!defaultFilter.cases">{{ data.cases }}</td>
-              <td [hidden]="!defaultFilter.cumulativeCases">
+              <td [hidden]="!defaultFilter.cumulative_cases">
                 {{ data.cumulative_cases }}
               </td>
               <td [hidden]="!defaultFilter.deaths">{{ data.deaths }}</td>
-              <td [hidden]="!defaultFilter.cumulativeDeaths">
+              <td [hidden]="!defaultFilter.cumulative_deaths">
                 {{ data.cumulative_deaths }}
               </td>
               <td [hidden]="!defaultFilter.recovered">{{ data.recovered }}</td>
-              <td [hidden]="!defaultFilter.cumulativeRecovered">
+              <td [hidden]="!defaultFilter.cumulative_recovered">
                 {{ data.cumulative_recovered }}
               </td>
             </tr>
@@ -112,7 +112,7 @@
                 class="sortable"
                 sortable="cumulative_cases"
                 (click)="sortedColumn = 'cumulative_cases'"
-                [hidden]="!defaultFilter.cumulativeCases"
+                [hidden]="!defaultFilter.cumulative_cases"
               >
                 Cumulative Cases&nbsp;<i class="fa fa-sort"></i>
               </th>
@@ -128,7 +128,7 @@
                 class="sortable"
                 sortable="cumulative_deaths"
                 (click)="sortedColumn = 'cumulative_deaths'"
-                [hidden]="!defaultFilter.cumulativeDeaths"
+                [hidden]="!defaultFilter.cumulative_deaths"
               >
                 Cumulative Deaths&nbsp;<i class="fa fa-sort"></i>
               </th>
@@ -144,7 +144,7 @@
                 class="sortable"
                 sortable="cumulative_recovered"
                 (click)="sortedColumn = 'cumulative_recovered'"
-                [hidden]="!defaultFilter.cumulativeRecovered"
+                [hidden]="!defaultFilter.cumulative_recovered"
               >
                 Cumulative Recovered&nbsp;<i class="fa fa-sort"></i>
               </th>
@@ -178,7 +178,7 @@
               class="sortable"
               sortable="cumulative_cases"
               (click)="sortedColumn = 'cumulative_cases'"
-              [hidden]="!defaultFilter.cumulativeCases"
+              [hidden]="!defaultFilter.cumulative_cases"
             >
               Cumulative Cases&nbsp;<i class="fa fa-sort"></i>
             </th>
@@ -194,7 +194,7 @@
               class="sortable"
               sortable="cumulative_deaths"
               (click)="sortedColumn = 'cumulative_deaths'"
-              [hidden]="!defaultFilter.cumulativeDeaths"
+              [hidden]="!defaultFilter.cumulative_deaths"
             >
               Cumulative Deaths&nbsp;<i class="fa fa-sort"></i>
             </th>
@@ -210,7 +210,7 @@
               class="sortable"
               sortable="cumulative_recovered"
               (click)="sortedColumn = 'cumulative_recovered'"
-              [hidden]="!defaultFilter.cumulativeRecovered"
+              [hidden]="!defaultFilter.cumulative_recovered"
             >
               Cumulative Recovered&nbsp;<i class="fa fa-sort"></i>
             </th>
@@ -221,15 +221,15 @@
           <tr *ngFor="let data of dataFederal | sort: sortedColumn">
             <td>{{ data.province }}</td>
             <td [hidden]="!defaultFilter.cases">{{ data.cases }}</td>
-            <td [hidden]="!defaultFilter.cumulativeCases">
+            <td [hidden]="!defaultFilter.cumulative_cases">
               {{ data.cumulative_cases }}
             </td>
             <td [hidden]="!defaultFilter.deaths">{{ data.deaths }}</td>
-            <td [hidden]="!defaultFilter.cumulativeDeaths">
+            <td [hidden]="!defaultFilter.cumulative_deaths">
               {{ data.cumulative_deaths }}
             </td>
             <td [hidden]="!defaultFilter.recovered">{{ data.recovered }}</td>
-            <td [hidden]="!defaultFilter.cumulativeRecovered">
+            <td [hidden]="!defaultFilter.cumulative_recovered">
               {{ data.cumulative_recovered }}
             </td>
           </tr>
