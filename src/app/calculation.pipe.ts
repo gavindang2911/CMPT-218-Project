@@ -17,7 +17,7 @@ export class CalculationPipe implements PipeTransform {
   }
 }
 
-function canada_cal(data: any) {
+export function canada_cal(data: any) {
   let calculatedArray = [];
 
   let init = {
@@ -46,7 +46,7 @@ function canada_cal(data: any) {
   return calculatedArray;
 }
 
-function prov_cal(data: any) {
+export function prov_cal(data: any) {
   let arr0 = [];
   let arr = [];
   let calculatedArray = [];
@@ -90,7 +90,7 @@ function prov_cal(data: any) {
   });
   return calculatedArray;
 }
-function hr_cal(data: any) {
+export function hr_cal(data: any) {
   let arr0 = [];
   let arr = [];
   let calculatedArray = [];
@@ -131,6 +131,5 @@ function hr_cal(data: any) {
       }, init)
     );
   });
-
   return calculatedArray;
 }

@@ -5,8 +5,10 @@ import {
   SimpleChanges,
   OnChanges,
 } from '@angular/core';
-import { ChartData, ChartOptions } from 'chart.js';
+import { Chart, ChartData, ChartOptions } from 'chart.js';
+import { canada_cal, hr_cal, prov_cal } from '../calculation.pipe';
 import { DataService } from '../data.service';
+import { FilterService } from '../filter.service';
 
 @Component({
   selector: 'app-bar-chart',
@@ -17,145 +19,97 @@ export class BarChartComponent implements OnChanges {
   province = [];
   dataSet = [];
   temp;
-  @Input() defaultFilter;
   @Input() dataDefault;
-  @Input() dataFederal;
+  temp2;
+
   dataDefault1 = [];
   // dataFederal;
 
   title = 'angular-ng2-charts-demo';
+  myChart;
+  // barChartData = {
+  //   labels: [],
+  //   datasets: [],
+  // };
+  // chartOptions: ChartOptions = {
+  //   responsive: true,
+  //   plugins: {
+  //     title: {
+  //       display: true,
+  //       text: 'Provincial Total',
+  //     },
+  //   },
+  // };
 
-  barChartData = {
-    labels: [],
-    datasets: []
-  };
-  chartOptions: ChartOptions = {
-    responsive: true,
-    plugins: {
-      title: {
-        display: true,
-        text: 'Provincial Total',
-      },
-    },
-  };
-
-  constructor(private ps: DataService) {
-    this.barChartData = {
-      labels :  [],
-      datasets : [
-        { label: 'Cases', data: [] },
-        { label: 'Deaths', data: []},
-        { label: 'Recover', data: [] },
-      ]
-    }
-  }
+  constructor(private ps: DataService, private fs: FilterService) {}
 
   ngOnInit(): void {
-
-
-    // this.ps.getDataDefault(this.ps.getDateDefault()).subscribe((data: any) => {
-
-    //   data.summary.forEach((e: any) => {
-    //     this.dataDefault1.push(e);
-    //     this.barChartData.labels.push(e.province); // A
-    //     this.barChartData.datasets[0].data.push(e.cases)
-    //     this.barChartData.datasets[1].data.push(e.deaths)
-    //     this.barChartData.datasets[2].data.push(e.recovered)
-    //   });
-    // });
-    // let x = 1;
-
-    // let title = [];
-    // let object = {
-    //   label:'',
-    //   data: [],
-    // };
-    // let barChartData2 = {
-    //   labels: [],
-    //   datasets: []
-    // };
-    // Object.keys(this.defaultFilter).forEach(e => {
-    //   if (this.defaultFilter[e] == true && e != 'provincial') {
-
-    //     this.ps.getDataDefault(this.ps.getDateDefault()).subscribe((response: any) => {
-    //       response.summary.forEach((a: any) => {
-    //         // title.push(a.province)
-    //         if (x == 1) {
-    //           this.barChartData.labels.push(a.province);
-    //         }
-    //         object.data.push(a[e]); // 5514, 0 , 0 , 0 ,339
-
-    //       });
-    //       object.label = e
-    //       console.log(object)
-    //       this.barChartData.datasets.push(object);
-    //       console.log(this.barChartData)
-    //       // barChartData2.labels = title;
-    //       // barChartData2.datasets.push(object);
-
-    //       // title = [];
-    //       object.label = ''
-    //       object.data = []
-    //       x = x +1;
-    //     });
-
-    //   }
-    // })
-
-
-
-
-
+    const ctx = document.getElementById('myChart') as HTMLCanvasElement;
+    this.myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
   }
-  ngOnChanges(changes: SimpleChanges) {
-    // for (const propName in changes) {
-    //   if (propName == 'defaultFilter') {
-        // const change = changes[propName].currentValue;
-        // console.log(change);
-        // console.log(change.length);
 
-        // for (let i = 0; i < change.length; i++) {
-        //   console.log('asdasd');
+  ngOnChanges(): void {
+    let arr = [];
+    for (const key in this.fs.filter) {
+      if (this.fs.filter[key] == true) {
+        arr.push(key);
+      }
+    }
+    this.myChart.data.labels = [];
+    this.myChart.data.datasets = [];
+    if (this.fs.filter.location == 'canada') {
+      this.dataDefault = canada_cal(this.dataDefault);
+    } else if (this.fs.filter.location == 'prov') {
+      this.dataDefault = prov_cal(this.dataDefault);
+    } else {
+      this.dataDefault = hr_cal(this.dataDefault);
+    }
+    for (let i = 0; i < arr.length; i++) {
+      let obj = {
+        label: '',
+        data: [],
+      };
 
-        // }
-        // const changeFilter = changes['defaultFilter'].currentValue;
+      this.dataDefault.forEach((e) => {
+        if (i == 0) {
+          this.myChart.data.labels.push(e.province);
+        }
+        obj.label = arr[i];
+        obj.data.push(e[arr[i]]);
+      });
+      this.myChart.data.datasets.push(obj);
 
-        // this.dataSet = [];
-        // let title = [];
-        // let object = {
-        //   label:'',
-        //   data: [],
-        // };
-        // let barChartData2 = {
-        //   labels: [],
-        //   datasets: []
-        // };
-
-
-        // Object.keys(changeFilter).forEach(e => {
-        //   if (changeFilter[e] == true && e!= 'provincial') {
-        //     // console.log(e);
-
-        //     // object.label = e; // Cases Deaths Recorve
-        //     //{ label: 'Cases', data: [], tension: 0.5 },
-        //     this.ps.getDataDefault(this.ps.getDateDefault()).subscribe((response: any) => {
-        //       response.summary.forEach((a: any) => {
-        //         title.push(a.province)
-        //         object.data.push(a[e]); // 5514, 0 , 0 , 0 ,339
-        //       });
-        //       object.label = e
-        //       barChartData2.labels = title;
-        //       barChartData2.datasets.push(object);
-        //       console.log(barChartData2)
-        //       title = [];
-        //       object.label = ''
-        //       object.data = []
-        //     });
-
-        //     this.barChartData = barChartData2;
-
-        //   }
-        // });
-
+    }
+    this.myChart.update();
   }
+
+  // initChart(chartData: any) {
+  //   Object.values(chartData).forEach(e => {
+  //     this.temp = e;
+  //     console.log(this.temp);
+  //     this.barChartData.labels.push(this.temp.province);
+  //     this.fs.filter
+  //   })
+  //   this.barChartData = {
+  //     labels :  [],
+  //     datasets : [
+  //       { label: 'Cases', data: [] },
+  //       { label: 'Deaths', data: []},
+  //       { label: 'Recover', data: [] },
+  //     ]
+  //   }
+  // }
 }

@@ -44,10 +44,10 @@ export class AppComponent implements OnInit {
     //   });
     // });
 
-    this.ps.getDataDefault().subscribe((data) => {
+    return this.ps.getDataDefault().subscribe((data) => {
       this.d = data;
       this.dataDefault = this.d.summary.map((e) => e);
-      // console.log(this.DataArr);
+      console.log(this.dataDefault);
     });
   }
 }
