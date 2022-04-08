@@ -27,6 +27,7 @@ export class BarChartComponent implements OnChanges {
 
   title = 'angular-ng2-charts-demo';
   myChart;
+  pieChar;
   // barChartData = {
   //   labels: [],
   //   datasets: [],
@@ -59,6 +60,15 @@ export class BarChartComponent implements OnChanges {
         },
       },
     });
+    const ctx2 = document.getElementById('pieChart') as HTMLCanvasElement;
+
+    this.pieChar =new Chart(ctx2, {
+      type: 'pie',
+      data : {
+        labels: [],
+        datasets: []
+      }
+    });
   }
 
   ngOnChanges(): void {
@@ -70,6 +80,8 @@ export class BarChartComponent implements OnChanges {
     }
     this.myChart.data.labels = [];
     this.myChart.data.datasets = [];
+    this.pieChar.data.labels = [];
+    this.pieChar.data.datasets = [];
     if (this.fs.filter.location == 'canada') {
       this.dataDefault = canada_cal(this.dataDefault);
     } else if (this.fs.filter.location == 'prov') {
@@ -86,14 +98,17 @@ export class BarChartComponent implements OnChanges {
       this.dataDefault.forEach((e) => {
         if (i == 0) {
           this.myChart.data.labels.push(e.province);
+          this.pieChar.data.labels.push(e.province);
         }
         obj.label = arr[i];
         obj.data.push(e[arr[i]]);
       });
       this.myChart.data.datasets.push(obj);
+      this.pieChar.data.datasets.push(obj);
 
     }
     this.myChart.update();
+    this.pieChar.update();
   }
 
   // initChart(chartData: any) {
