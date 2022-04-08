@@ -5,8 +5,9 @@ export type Stats = {
     cumulative_deaths: boolean;
     recovered: boolean;
     cumulative_recovered: boolean;
-    federal:boolean;
-    provincial:boolean;
+    location: string;
+    // federal:boolean;
+    // provincial:boolean;
     startdate:string;
     enddate:string;
     // [key: string]: boolean;
@@ -19,8 +20,9 @@ const DEFAULT_FILTER: Stats = {
     cumulative_deaths: false,
     recovered: true,
     cumulative_recovered: false,
-    federal: false,
-    provincial:true,
+    location: 'prov',
+    // federal: false,
+    // provincial:true,
     startdate:'',
     enddate:''
 };

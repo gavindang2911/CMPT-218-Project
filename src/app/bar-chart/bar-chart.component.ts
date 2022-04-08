@@ -43,6 +43,9 @@ export class BarChartComponent implements OnChanges {
     this.barChartData = {
       labels :  [],
       datasets : [
+        { label: 'Cases', data: [] },
+        { label: 'Deaths', data: []},
+        { label: 'Recover', data: [] },
       ]
     }
   }
@@ -60,44 +63,44 @@ export class BarChartComponent implements OnChanges {
     //     this.barChartData.datasets[2].data.push(e.recovered)
     //   });
     // });
-    let x = 1;
+    // let x = 1;
 
-    let title = [];
-    let object = {
-      label:'',
-      data: [],
-    };
-    let barChartData2 = {
-      labels: [],
-      datasets: []
-    };
-    Object.keys(this.defaultFilter).forEach(e => {
-      if (this.defaultFilter[e] == true && e != 'provincial') {
+    // let title = [];
+    // let object = {
+    //   label:'',
+    //   data: [],
+    // };
+    // let barChartData2 = {
+    //   labels: [],
+    //   datasets: []
+    // };
+    // Object.keys(this.defaultFilter).forEach(e => {
+    //   if (this.defaultFilter[e] == true && e != 'provincial') {
 
-        this.ps.getDataDefault(this.ps.getDateDefault()).subscribe((response: any) => {
-          response.summary.forEach((a: any) => {
-            // title.push(a.province)
-            if (x == 1) {
-              this.barChartData.labels.push(a.province);
-            }
-            object.data.push(a[e]); // 5514, 0 , 0 , 0 ,339
+    //     this.ps.getDataDefault(this.ps.getDateDefault()).subscribe((response: any) => {
+    //       response.summary.forEach((a: any) => {
+    //         // title.push(a.province)
+    //         if (x == 1) {
+    //           this.barChartData.labels.push(a.province);
+    //         }
+    //         object.data.push(a[e]); // 5514, 0 , 0 , 0 ,339
 
-          });
-          object.label = e
-          console.log(object.data)
-          this.barChartData.datasets.push(object);
-          console.log(this.barChartData)
-          // barChartData2.labels = title;
-          // barChartData2.datasets.push(object);
+    //       });
+    //       object.label = e
+    //       console.log(object)
+    //       this.barChartData.datasets.push(object);
+    //       console.log(this.barChartData)
+    //       // barChartData2.labels = title;
+    //       // barChartData2.datasets.push(object);
 
-          // title = [];
-          object.label = ''
-          object.data = []
-          x = x +1;
-        });
+    //       // title = [];
+    //       object.label = ''
+    //       object.data = []
+    //       x = x +1;
+    //     });
 
-      }
-    })
+    //   }
+    // })
 
 
 

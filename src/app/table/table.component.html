@@ -70,7 +70,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of dataDefault | sort: sortedColumn">
+      <tr *ngFor="let data of dataDefault | calculation: defaultFilter.location | sort: sortedColumn ">
         <td>{{ data.province }}</td>
         <td [hidden]="defaultFilter.location != 'hr'">
           {{ data.health_region }}

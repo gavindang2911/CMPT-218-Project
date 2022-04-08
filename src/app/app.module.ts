@@ -9,6 +9,8 @@ import { FilterComponent } from './filter/filter.component';
 import { SortPipe } from './sort.pipe';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { NgChartsModule } from 'ng2-charts';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CalculationPipe } from './calculation.pipe';
 
 
 @NgModule({
@@ -17,12 +19,15 @@ import { NgChartsModule } from 'ng2-charts';
     TableComponent,
     FilterComponent,
     SortPipe,
-    BarChartComponent
+    BarChartComponent,
+    CalculationPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
     NgChartsModule
   ],
   providers: [],

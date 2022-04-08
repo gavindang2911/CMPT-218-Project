@@ -10,10 +10,6 @@ export class DataService {
   }
 
   getDataDefault() {
-    console.log(this.fs.filter)
-    console.log(this.fs.filter.location)
-    console.log(this.fs.filter.startdate)
-    console.log(this.fs.filter.enddate)
     return this.http.get(`https://api.opencovid.ca/summary?loc=${this.fs.filter.location}&after=${this.fs.filter.startdate}&before=${this.fs.filter.enddate}`);
   }
 }

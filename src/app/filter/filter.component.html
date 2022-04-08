@@ -1,4 +1,4 @@
-<section style="position: fixed;">
+<!-- <section style="position: fixed;">
     <div>
       <h2>Filters</h2>
       <h3>Stat</h3>
@@ -65,23 +65,44 @@
 
       <h3 class="text-indigo-400 text-xl">Location</h3>
 
-      <div>
-        <label for="federal">Federal</label>
-        <input type="checkbox" id="federal" name="federal"
-        [checked]="defaultFilter.federal"
-        (change)="onChange($event)"/>
+      <div class="location">
+        <h4>Location</h4>
+        <div class="form-check form-check-inline">
+          <input
+            type="radio"
+            class="form-check-input"
+            formControlName="location"
+            id="federal-checkbox"
+            value="canada"
+            (change)="onChange($event)"
+          />
+          <label for="federal-checkbox ">Federal</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input
+            type="radio"
+            class="form-check-input"
+            formControlName="location"
+            id="provincial-checkbox"
+            value="prov"
+            (change)="onChange($event)"
+          />
+          <label for="provincial-checkbox ">Provincial</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            type="radio"
+            class="form-check-input"
+            formControlName="location"
+            id="hr-checkbox"
+            value="hr"
+            (change)="onChange($event)"
+          />
+          <label for="hr-checkbox ">Health Regions</label>
+        </div>
       </div>
-      <div >
-        <label for="provincial">Provincial</label>
-        <input type="checkbox" id="provincial" name="provincial" [disabled]="defaultFilter.federal"
-        [checked]="defaultFilter.provincial"
-          (change)="onChange($event)"
-        />
-      </div>
-      <div>
-        <label for="regional">Regional</label>
-        <input type="checkbox" id="regional" [disabled]="defaultFilter.federal"/>
-      </div>
+
 
       <h3 class="text-indigo-400 text-xl">Time</h3>
 
@@ -94,4 +115,119 @@
         <input type="date" id="end-date" name="enddate" (change)="onChange($event)">
       </div>
     </div>
-  </section>
+  </section> -->
+
+
+  <form [formGroup]="form" (ngSubmit)="onChange(form.value)" style="position: fixed;">
+    <div class="form-group">
+      <div class="stats">
+        <h2>Filters</h2>
+        <h3 class="text-indigo-400 text-xl">Stats</h3>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            formControlName="cases"
+            id="cases_checkbox"
+          />
+          <label for="cases_checkbox">New Cases</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            formControlName="cumulative_cases"
+            id="cumulative_cases_checkbox"
+          />
+          <label for="cumulative_cases_checkbox">Cumulative Cases</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            formControlName="deaths"
+            id="deaths_checkbox"
+          />
+          <label for="deaths_checkbox">New Deaths</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            formControlName="cumulative_deaths"
+            id="cumulative_deaths_checkbox"
+          />
+          <label for="cumulative_deaths_checkbox">Cumulative Deaths</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            formControlName="recovered"
+            id="recovered_checkbox"
+          />
+          <label for="recovered_checkbox">New Recovered</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            formControlName="cumulative_recovered"
+            id="cumulative_recovered_checkbox"
+          />
+          <label for="cumulative_recovered_checkbox ">Cumulative Recovered</label>
+        </div>
+      </div>
+      <div class="location">
+        <h3 class="text-indigo-400 text-xl">Location</h3>
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            formControlName="location"
+            id="canada_checkbox"
+            value="canada"
+          />
+          <label for="canada_checkbox ">Federal</label>
+        </div>
+
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            formControlName="location"
+            id="prov_checkbox"
+            value="prov"
+          />
+          <label for="prov_checkbox ">Provincial</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            formControlName="location"
+            id="hr_checkbox"
+            value="hr"
+          />
+          <label for="hr_checkbox ">Health Regions</label>
+        </div>
+      </div>
+      <div class="dates">
+        <h3 class="text-indigo-400 text-xl">Dates</h3>
+        <tr id="startdate">
+          <td><label for="startdate">Start Date: </label></td>
+          <td>
+            <input type="date" formControlName="startdate" id="startdate" />
+          </td>
+        </tr>
+        <tr id="enddate">
+          <td><label for="enddate">End Date:</label></td>
+          <td>
+            <input type="date" formControlName="enddate" id="enddate" />
+          </td>
+        </tr>
+      </div>
+
+      <input type="submit" class="btn btn-primary btn-block" />
+    </div>
+  </form>
