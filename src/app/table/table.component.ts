@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../data.service';
+import { FilterService } from '../filter.service';
+import { Stats } from '../stats.type';
 
 @Component({
   selector: 'app-table',
@@ -10,19 +12,16 @@ export class TableComponent implements OnInit {
   // dataDefault: Array<any>;
   // dataFederal= [];
   sortedColumn: string;
-  @Input() defaultFilter;
+  // @Input() defaultFilter;
   @Input() dataDefault;
-  @Input() dataFederal;
+  // @Input() dataFederal;
+  defaultFilter: Stats;
 
-  constructor(private ps: DataService) {}
+  constructor(private ps: DataService, private fs: FilterService) {
+    this.defaultFilter = fs.filter;
+  }
 
   ngOnInit(): void {
-    // this.dataDefault = this.ps.getDataDefault();
-    // this.ps.getDataFederal().subscribe((observer: any) => {
-    //   observer.summary.forEach((e: any) => {
-    //     this.dataFederal.push(e);
-    //   });
-    // });
   }
 
 

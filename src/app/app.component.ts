@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './data.service';
-import DEFAULT_FILTER, { Stats } from './stats.type';
+import { FilterService } from './filter.service';
+import DEFAULT_FILTER, { FetchData, Stats } from './stats.type';
 
 @Component({
   selector: 'app-root',
@@ -9,30 +10,31 @@ import DEFAULT_FILTER, { Stats } from './stats.type';
 })
 export class AppComponent implements OnInit {
   title = 'Covid Tracker';
-  defaultFilter = DEFAULT_FILTER;
-  dateDefault;
+  defaultFilter:Stats;
   dataDefault = [];
-  dataFederal = [];
 
-  constructor(private ps: DataService) {}
+  constructor(private ps: DataService, private fs: FilterService) {
+    this.defaultFilter = fs.filter;
+  }
 
   ngOnInit() {
-    this.dateDefault = this.ps.getDateDefault();
 
-    this.ps.getDataDefault(this.dateDefault).subscribe((data: any) => {
+    this.ps.getDataDefault().subscribe((data: any) => {
       data.summary.forEach((e: any) => {
         this.dataDefault.push(e);
       });
-    });
+      console.log(this.dataDefault);
 
-    this.ps.getDataFederal(this.dateDefault).subscribe((data: any) => {
-      data.summary.forEach((e: any) => {
-        this.dataFederal.push(e);
-      });
     });
   }
 
   updateStats(newStats: Stats) {
     this.defaultFilter = newStats;
+    this.dataDefault = [];
+    this.ps.getDataDefault().subscribe((data: any) => {
+      data.summary.forEach((e: any) => {
+        this.dataDefault.push(e);
+      });
+    });
   }
 }
