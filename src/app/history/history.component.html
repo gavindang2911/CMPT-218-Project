@@ -1,2 +1,26 @@
 <h1>history works!</h1>
 
+<table class="table table-striped table-responsive-md btn-table">
+  <thead>
+    <tr>
+      <th>Time Saved</th>
+      <th>Stat</th>
+      <th>Location</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let e of history">
+        <th>{{e.time_save}}</th>
+        <th class="groups row">
+            <div class="group" *ngFor="let key of objectKeys(e.stat)">
+                <p> {{key}} &nbsp;</p>
+            </div>
+        </th>
+        <th>{{e.location}} &nbsp;</th>
+        <th class="groups row">
+            <div class="group" *ngFor="let value of objectValues(e.time)" >{{value}}  &nbsp;</div>
+        </th>
+    </tr>
+  </tbody>
+</table>

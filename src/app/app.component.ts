@@ -19,15 +19,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    // this.ps.getDataDefault().subscribe((data: any) => {
-    //   data.summary.forEach((e: any) => {
-    //     this.dataDefault.push(e);
-    //   });
-    //   console.log(this.dataDefault);
-
-    // });
-
     this.ps.getDataDefault().subscribe((data) => {
       this.d = data;
       this.dataDefault = this.d.summary.map((e) => e);
@@ -37,13 +28,6 @@ export class AppComponent implements OnInit {
 
   updateStats(newStats: Stats) {
     this.defaultFilter = newStats;
-    // this.dataDefault = [];
-    // this.ps.getDataDefault().subscribe((data: any) => {
-    //   data.summary.forEach((e: any) => {
-    //     this.dataDefault.push(e);
-    //   });
-    // });
-
     return this.ps.getDataDefault().subscribe((data) => {
       this.d = data;
       this.dataDefault = this.d.summary.map((e) => e);
