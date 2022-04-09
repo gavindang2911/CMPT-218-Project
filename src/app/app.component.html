@@ -1,8 +1,11 @@
 <nav class="navbar navbar-dark bg-dark" >
   <div class="container">
-    <span class="navbar-brand">{{ title }}</span>
+    <!-- <a class="navbar-brand">{{ title }}</a> -->
+    <a class="navbar-brand" routerLink="/">Home</a>
+    <a class="navbar-brand" routerLink="/history">History</a>
   </div>
 </nav>
+<router-outlet></router-outlet>
 
 <body >
 

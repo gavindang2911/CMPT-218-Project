@@ -118,7 +118,7 @@
   </section> -->
 
 
-  <form [formGroup]="form" (ngSubmit)="onChange(form.value)" style="position: fixed;">
+  <form [formGroup]="form" (ngSubmit)="onChange(form.value)" >
     <div class="form-group">
       <div class="stats">
         <h2>Filters</h2>
@@ -212,7 +212,7 @@
           <label for="hr_checkbox ">Health Regions</label>
         </div>
       </div>
-      <div class="dates">
+      <div class="dates" style="padding-bottom: 20px;">
         <h3 class="text-indigo-400 text-xl">Dates</h3>
         <tr id="startdate">
           <td><label for="startdate">Start Date: </label></td>
@@ -228,6 +228,8 @@
         </tr>
       </div>
 
-      <input type="submit" class="btn btn-primary btn-block" />
+      <!-- <input type="submit" class="btn btn-primary btn-block" /> -->
+      <button class="btn btn-primary btn-block">Apply</button>
     </div>
   </form>
+  <button class="btn btn-primary btn-block " (click)="saveData()">Save Filter</button>

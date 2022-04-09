@@ -11,6 +11,7 @@ import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { NgChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalculationPipe } from './calculation.pipe';
+import { HistoryComponent } from './history/history.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { CalculationPipe } from './calculation.pipe';
     FilterComponent,
     SortPipe,
     BarChartComponent,
-    CalculationPipe
+    CalculationPipe,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,

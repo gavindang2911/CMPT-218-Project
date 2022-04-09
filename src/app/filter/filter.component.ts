@@ -87,4 +87,8 @@ export class FilterComponent implements OnInit {
     });
   }
 
+  saveData() {
+    console.log(this.fs.filter);
+  }
+
 }
