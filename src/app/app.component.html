@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-dark" >
+<nav class="navbar navbar-dark bg-dark">
   <div class="container">
     <!-- <a class="navbar-brand">{{ title }}</a> -->
     <a class="navbar-brand" routerLink="/">Home</a>
@@ -7,25 +7,19 @@
 </nav>
 <router-outlet></router-outlet>
 
-<body >
-
-  <div class="p-5" >
+<body>
+  <div class="p-5">
     <div class="row">
-        <div class="col-md-3 p-5">
-          <app-filter
-          (onFilterChange) = "updateStats($event)"
-        ></app-filter>
-        </div>
-        <div class="col-md-6">
-          <h3>Time Period: {{defaultFilter.startdate}}  {{defaultFilter.enddate}}</h3>
-          <app-table
-          [dataDefault] = "dataDefault"
-          ></app-table>
-          <app-bar-chart
-          [dataDefault] = "dataDefault"
-          ></app-bar-chart>
-        </div>
+      <div class="col-md-3 p-5">
+        <app-filter (onFilterChange)="updateStats($event)" [dataDefault]="dataDefault"></app-filter>
+      </div>
+      <div class="col-md-6">
+        <h3>
+          Time Period: {{ defaultFilter.startdate }} {{ defaultFilter.enddate }}
+        </h3>
+        <app-table [dataDefault]="dataDefault"></app-table>
+        <app-bar-chart [dataDefault]="dataDefault"></app-bar-chart>
+      </div>
     </div>
   </div>
 </body>
-

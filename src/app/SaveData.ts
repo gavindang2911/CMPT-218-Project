@@ -1,24 +1,23 @@
 export default class SaveData {
     time_save:  string;
-    stat: object;
+    stat: string[];
     location: string[];
-    time: object;
+    time: string[];
 
     constructor() {
-
+        this.time_save;
+        this.stat = [];
+        this.location = [];
+        this.time = [];
     }
 }
 
 // {
 //     id: 1,
 //     timeSave: (new Date()).getTime(),
-//     stat: {
-//         Cases: 100,
-//         Deaths: 10
-//     },
+//     stat: ['Cases', 'Deaths'],
 //     location : ['Province', 'Regional'],
-//     time: {
-//         start: "March-05-2020",
-//         end: 'June-06-2020',
-//     }
+//     time: ["March-05-2020", "June-06-2020"],
+
+
 //   },

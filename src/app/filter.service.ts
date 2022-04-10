@@ -13,6 +13,6 @@ export class FilterService {
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
 
-    this.filter.startdate = year + '-' + month + '-' + '-' +day;
+    this.filter.startdate = year + '-' + month + '-' +day;
   }
 }
