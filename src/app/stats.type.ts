@@ -27,4 +27,29 @@ const DEFAULT_FILTER: Stats = {
     enddate:''
 };
 
+export function convertString(s: string): string {
+    let returnValue: string;
+    switch (s) {
+        case 'cases':
+            returnValue = 'Cases';
+            break;
+        case 'cumulative_cases':
+            returnValue = 'Cummulative Cases';
+            break;
+        case 'deaths':
+            returnValue = 'Deaths';
+            break;
+        case 'cumulative_deaths':
+            returnValue = 'Cumulative Deaths';
+            break;
+        case 'recovered':
+            returnValue = 'Recovered';
+            break;
+        case 'cumulative_recovered':
+            returnValue = 'Cumulative Recovered';
+            break;
+    }
+    return returnValue;
+}
+
 export default DEFAULT_FILTER;

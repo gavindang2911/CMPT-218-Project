@@ -1,6 +1,11 @@
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { canada_cal, hr_cal, prov_cal } from '../calculation.pipe';
+import { DataService } from '../data.service';
 import { FilterService } from '../filter.service';
+import { HistoryService } from '../history.service';
+import SaveData from '../SaveData';
+import { convertString } from '../stats.type';
 
 @Component({
   selector: 'app-filter',
@@ -8,43 +13,18 @@ import { FilterService } from '../filter.service';
   styleUrls: ['./filter.component.css']
 })
 export class FilterComponent implements OnInit {
+  clicked = false;
+  clicked2 = true;
   defaultFilter;
+  @Input() dataDefault;
   @Output() onFilterChange = new EventEmitter();
   form!: FormGroup;
 
-  constructor( private fs: FilterService) {
-    this.defaultFilter = fs.filter;
+  constructor( private fs: FilterService, private ps: DataService, private hs: HistoryService) {
+    this.defaultFilter = this.fs.filter;
   }
 
   onChange(e) {
-    // if (e.target) {
-    //   let name = (<HTMLInputElement>e.target).name;
-    //   let value = (<HTMLInputElement>e.target).checked;
-
-    //   console.log(name);
-    //   console.log(value);
-
-    //   if (name == "startdate") {
-    //     let start = (<HTMLInputElement>e.target).value;
-    //     this.defaultFilter[name] = start;
-    //   } else if (name == "enddate") {
-    //     let end = (<HTMLInputElement>e.target).value;
-    //     this.defaultFilter[name] = end;
-    //   } else if (name == "federal") {
-    //     this.defaultFilter.location = 'canada';
-    //   }  else if (name == "provincial") {
-    //     this.defaultFilter.location = 'prov';
-    //   }  else if (name == "regional") {
-    //     this.defaultFilter.location = 'hr';
-    //   }
-    //   else {
-    //     this.defaultFilter[name] = value;
-    //   }
-
-    //   console.log(this.defaultFilter);
-    //   this.onFilterChange.emit({ ...this.defaultFilter });
-    // }
-
     if (Date.parse(e.startdate) > Date.parse(e.enddate)) {
       window.alert('Invalid start day');
     } else {
@@ -71,7 +51,7 @@ export class FilterComponent implements OnInit {
 
   ngOnInit(): void {
     let day: Date = new Date(new Date());
-    day.setDate(new Date().getDate() - 2);
+    day.setDate(new Date().getDate() - 1);
     let date: string = day.toISOString().split('T')[0];
 
     this.form = new FormGroup({
@@ -88,7 +68,40 @@ export class FilterComponent implements OnInit {
   }
 
   saveData() {
-    console.log(this.fs.filter);
+    // this.clicked2 = true;
+
+    let save: SaveData = new SaveData();
+    save.time_save = new Date().toLocaleString();
+    for (const key in this.fs.filter) {
+      if (this.fs.filter[key] == true) {
+        save.stat.push(convertString(key));
+      }
+    }
+    if (this.fs.filter.location == 'canada') {
+      save.location.push('Federal')
+    } else if (this.fs.filter.location == 'prov') {
+      save.location.push('Province')
+    } else {
+      save.location.push('Province');
+      save.location.push('Regional');
+    }
+
+    if (this.fs.filter.startdate == this.fs.filter.enddate) {
+      save.time.push(this.fs.filter.startdate);
+    } else {
+      save.time.push(this.fs.filter.startdate);
+      save.time.push(this.fs.filter.enddate);
+    }
+
+    console.log(save)
+
+
+    this.hs.add(save).subscribe((data) => {
+      // this.router.navigateByUrl('/');
+    });
   }
 
+  actionMethod() {
+    this.clicked2 = false;
+  }
 }

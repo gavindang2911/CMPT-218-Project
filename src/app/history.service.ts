@@ -10,6 +10,13 @@ export class HistoryService {
   }
 
   getHistory(): Observable<Object> {
-    return this.http.get('https://218.selfip.net/apps/DlcvZDIxKs/collections/history/documents');
+    return this.http.get('https://218.selfip.net/apps/DlcvZDIxKs/collections/history/documents/');
+  }
+
+  add(save) {
+    return this.http.post(
+      'https://218.selfip.net/apps/DlcvZDIxKs/collections/history/documents/',
+      { "key": Date.now(), "data": save }
+    );
   }
 }
