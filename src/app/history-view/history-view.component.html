@@ -1,0 +1,96 @@
+<body>
+  <h3>
+    Time Period: {{ filter.startdate }} {{ filter.enddate }}
+  </h3>
+    <table class="table table-striped table-responsive-md btn-table">
+      <thead>
+        <tr>
+          <th
+            class="sortable"
+            sortable="province"
+            (click)="sortedColumn = 'province'"
+          >
+            Province&nbsp;<i class="fa fa-sort"></i>
+          </th>
+          <th
+            class="sortable"
+            sortable="region"
+            (click)="sortedColumn = 'health_region'"
+            [hidden]="filter.location != 'hr'"
+          >
+            Health Region&nbsp;<i class="fa fa-sort"></i>
+          </th>
+
+          <th
+            class="sortable"
+            sortable="cases"
+            (click)="sortedColumn = 'cases'"
+            [hidden]="!filter.cases"
+          >
+            New Cases&nbsp;<i class="fa fa-sort"></i>
+          </th>
+          <th
+            class="sortable"
+            sortable="cumulative_cases"
+            (click)="sortedColumn = 'cumulative_cases'"
+            [hidden]="!filter.cumulative_cases"
+          >
+            Cumulative Cases&nbsp;<i class="fa fa-sort"></i>
+          </th>
+          <th
+            class="sortable"
+            sortable="deaths"
+            (click)="sortedColumn = 'deaths'"
+            [hidden]="!filter.deaths"
+          >
+            New Deaths&nbsp;<i class="fa fa-sort"></i>
+          </th>
+          <th
+            class="sortable"
+            sortable="cumulative_deaths"
+            (click)="sortedColumn = 'cumulative_deaths'"
+            [hidden]="!filter.cumulative_deaths"
+          >
+            Cumulative Deaths&nbsp;<i class="fa fa-sort"></i>
+          </th>
+          <th
+            class="sortable"
+            sortable="recovered"
+            (click)="sortedColumn = 'recovered'"
+            [hidden]="!filter.recovered"
+          >
+            New Recovered&nbsp;<i class="fa fa-sort"></i>
+          </th>
+          <th
+            class="sortable"
+            sortable="cumulative_recovered"
+            (click)="sortedColumn = 'cumulative_recovered'"
+            [hidden]="!filter.cumulative_recovered"
+          >
+            Cumulative Recovered&nbsp;<i class="fa fa-sort"></i>
+          </th>
+          <!-- <th>Delete</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of saveFilterData | calculation: filter.location | sort: sortedColumn ">
+          <td>{{ data.province }}</td>
+          <td [hidden]="filter.location != 'hr'">
+            {{ data.health_region }}
+          </td>
+          <td [hidden]="!filter.cases">{{ data.cases }}</td>
+          <td [hidden]="!filter.cumulative_cases">
+            {{ data.cumulative_cases }}
+          </td>
+          <td [hidden]="!filter.deaths">{{ data.deaths }}</td>
+          <td [hidden]="!filter.cumulative_deaths">
+            {{ data.cumulative_deaths }}
+          </td>
+          <td [hidden]="!filter.recovered">{{ data.recovered }}</td>
+          <td [hidden]="!filter.cumulative_recovered">
+            {{ data.cumulative_recovered }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>

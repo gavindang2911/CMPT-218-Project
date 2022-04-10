@@ -1,49 +1,62 @@
-<div class="p-5">
-  <div class="row">
-    <div class="col-md-3 p-5">
-    </div>
-    <div class="col-md-6">
-      <table class="table table-striped table-responsive-md btn-table">
-        <thead>
-          <tr>
-            <th>Time Saved</th>
-            <th>Stat</th>
-            <th>Location</th>
-            <th>Time</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let e of history">
-            <th>{{ e.time_save }}</th>
-            <th >
-              <!-- <div class="group" > -->
+<body>
+  <div class="p-5">
+    <div class="row">
+      <div class="col-md-2 p-5"></div>
+      <div class="col-md-8">
+        <table class="table table-striped table-responsive-md btn-table">
+          <thead>
+            <tr>
+              <th>Time Saved</th>
+              <th>Stat</th>
+              <th>Location</th>
+              <th>Time</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let e of history">
+              <th>{{ e.time_save }}</th>
+              <th>
                 <p>{{ e.stat }} &nbsp;</p>
-              <!-- </div> -->
-            </th>
-            <th>{{ e.location }} &nbsp;</th>
-            <th>
-              <!-- <div class="group" > -->
+              </th>
+              <th>{{ e.location }} &nbsp;</th>
+              <th>
                 {{ e.time }} &nbsp;
-              <!-- </div> -->
-            </th>
-            <td>
-              <button class="btn btn-primary">
-                <!-- <button
-              class="btn btn-primary"
-              (click)="moreInfo(report.data.personReported)"
-              > -->
-                More
-              </button>
-            </td>
-            <td>
-              <!-- <button class="btn btn-danger" (click)="deleteReport(report.data)"> -->
-              <button class="btn btn-danger">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </th>
+              <td>
+                <button class="btn btn-primary" (click)="more(e)" data-toggle="modal" data-target="#exampleModal">
+                  More
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-danger" (click)="deleteThisFilter(e)">Delete</button>
+                <!-- <button class="btn btn-danger">Delete</button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" style="max-width: 70%;" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <app-history-view [saveFilterData]="saveFilterData" [filter]="input"></app-history-view>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+
+</body>

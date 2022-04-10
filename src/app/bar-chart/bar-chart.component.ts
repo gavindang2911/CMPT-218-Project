@@ -26,8 +26,8 @@ export class BarChartComponent implements OnChanges {
   // dataFederal;
 
   title = 'angular-ng2-charts-demo';
-  myChart;
-  pieChar;
+  myChart: any;
+  pieChar: any  ;
   // barChartData = {
   //   labels: [],
   //   datasets: [],

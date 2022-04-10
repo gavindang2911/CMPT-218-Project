@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { canada_cal, hr_cal, prov_cal } from '../calculation.pipe';
 import { DataService } from '../data.service';
@@ -6,11 +6,12 @@ import { FilterService } from '../filter.service';
 import { HistoryService } from '../history.service';
 import SaveData from '../SaveData';
 import { convertString } from '../stats.type';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.css']
+  styleUrls: ['./filter.component.css'],
 })
 export class FilterComponent implements OnInit {
   clicked = false;
@@ -20,7 +21,11 @@ export class FilterComponent implements OnInit {
   @Output() onFilterChange = new EventEmitter();
   form!: FormGroup;
 
-  constructor( private fs: FilterService, private ps: DataService, private hs: HistoryService) {
+  constructor(
+    private fs: FilterService,
+    private router: Router,
+    private hs: HistoryService
+  ) {
     this.defaultFilter = this.fs.filter;
   }
 
@@ -29,19 +34,11 @@ export class FilterComponent implements OnInit {
       window.alert('Invalid start day');
     } else {
       this.defaultFilter.cases = <boolean>e.cases;
-      this.defaultFilter.cumulative_cases = <boolean>(
-        e.cumulative_cases
-      );
+      this.defaultFilter.cumulative_cases = <boolean>e.cumulative_cases;
       this.defaultFilter.deaths = <boolean>e.deaths;
-      this.defaultFilter.cumulative_deaths = <boolean>(
-        e.cumulative_deaths
-      );
-      this.defaultFilter.recovered = <boolean>(
-        e.recovered
-      );
-      this.defaultFilter.cumulative_recovered = <boolean>(
-        e.cumulative_recovered
-      );
+      this.defaultFilter.cumulative_deaths = <boolean>e.cumulative_deaths;
+      this.defaultFilter.recovered = <boolean>e.recovered;
+      this.defaultFilter.cumulative_recovered = <boolean>e.cumulative_recovered;
       this.defaultFilter.location = <string>e.location;
       this.defaultFilter.startdate = <string>e.startdate;
       this.defaultFilter.enddate = <string>e.enddate;
@@ -78,26 +75,21 @@ export class FilterComponent implements OnInit {
       }
     }
     if (this.fs.filter.location == 'canada') {
-      save.location.push('Federal')
+      save.location.push('Federal');
     } else if (this.fs.filter.location == 'prov') {
-      save.location.push('Province')
+      save.location.push('Province');
     } else {
       save.location.push('Province');
       save.location.push('Regional');
     }
 
-    if (this.fs.filter.startdate == this.fs.filter.enddate) {
-      save.time.push(this.fs.filter.startdate);
-    } else {
-      save.time.push(this.fs.filter.startdate);
-      save.time.push(this.fs.filter.enddate);
-    }
+    save.time.push(this.fs.filter.startdate);
+    save.time.push(this.fs.filter.enddate);
 
-    console.log(save)
-
+    console.log(save);
 
     this.hs.add(save).subscribe((data) => {
-      // this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/history');
     });
   }
 
