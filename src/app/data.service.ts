@@ -13,4 +13,8 @@ export class DataService {
   getDataDefault(): Observable<Object> {
     return this.http.get(`https://api.opencovid.ca/summary?loc=${this.fs.filter.location}&after=${this.fs.filter.startdate}&before=${this.fs.filter.enddate}`);
   }
+
+  getDataFromHistory(input): Observable<Object> {
+    return this.http.get(`https://api.opencovid.ca/summary?loc=${input.location}&after=${input.startdate}&before=${input.enddate}`);
+  }
 }

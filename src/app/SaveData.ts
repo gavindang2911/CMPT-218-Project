@@ -1,10 +1,12 @@
 export default class SaveData {
+    id: number;
     time_save:  string;
     stat: string[];
     location: string[];
     time: string[];
 
     constructor() {
+        this.id = Date.now();
         this.time_save;
         this.stat = [];
         this.location = [];

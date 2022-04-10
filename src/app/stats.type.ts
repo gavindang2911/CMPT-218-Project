@@ -51,5 +51,29 @@ export function convertString(s: string): string {
     }
     return returnValue;
 }
+export function convertStat(s: string): string {
+    let returnValue: string;
+    switch (s) {
+        case 'Cases':
+            returnValue = 'cases';
+            break;
+        case 'Cummulative Cases':
+            returnValue = 'cumulative_cases';
+            break;
+        case 'Deaths':
+            returnValue = 'deaths';
+            break;
+        case 'Cumulative Deaths':
+            returnValue = 'cumulative_deaths';
+            break;
+        case 'Recovered':
+            returnValue = 'recovered';
+            break;
+        case 'Cumulative Recovered':
+            returnValue = 'cumulative_recovered';
+            break;
+    }
+    return returnValue;
+}
 
 export default DEFAULT_FILTER;

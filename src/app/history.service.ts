@@ -16,7 +16,13 @@ export class HistoryService {
   add(save) {
     return this.http.post(
       'https://218.selfip.net/apps/DlcvZDIxKs/collections/history/documents/',
-      { "key": Date.now(), "data": save }
+      { "key": save.id, "data": save }
+    );
+  }
+
+  delete(save) {
+    return this.http.delete(
+      `https://218.selfip.net/apps/DlcvZDIxKs/collections/history/documents/${save.id}/`
     );
   }
 }
