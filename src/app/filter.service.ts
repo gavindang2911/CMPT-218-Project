@@ -8,11 +8,11 @@ export class FilterService {
   filter: Stats;
   constructor() {
     this.filter = DEFAULT_FILTER;
-    let date = new Date();
-    let day = date.getDate() - 1;
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
+    let a: Date = new Date(new Date());
+    a.setDate(new Date().getDate() - 1);
+    let b: string = a.toISOString().split('T')[0];
 
-    this.filter.startdate = year + '-' + month + '-' +day;
+    this.filter.startdate = b;
+    this.filter.enddate = b;
   }
 }

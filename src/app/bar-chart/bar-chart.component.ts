@@ -1,48 +1,30 @@
 import {
-  Component,
-  Input,
-  OnInit,
-  SimpleChanges,
-  OnChanges,
+  Component, OnInit
 } from '@angular/core';
-import { Chart, ChartData, ChartOptions } from 'chart.js';
+import { Chart } from 'chart.js';
 import { canada_cal, hr_cal, prov_cal } from '../calculation.pipe';
 import { DataService } from '../data.service';
 import { FilterService } from '../filter.service';
+import { Stats } from '../stats.type';
 
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.css'],
 })
-export class BarChartComponent implements OnChanges {
-  province = [];
-  dataSet = [];
-  temp;
-  @Input() dataDefault;
-  temp2;
-
-  dataDefault1 = [];
-  // dataFederal;
+export class BarChartComponent implements OnInit {
+  temp: any;
+  temp2: any;
+  dataDefault = [];
+  defaultFilter: Stats;
 
   title = 'angular-ng2-charts-demo';
   myChart: any;
-  pieChar: any  ;
-  // barChartData = {
-  //   labels: [],
-  //   datasets: [],
-  // };
-  // chartOptions: ChartOptions = {
-  //   responsive: true,
-  //   plugins: {
-  //     title: {
-  //       display: true,
-  //       text: 'Provincial Total',
-  //     },
-  //   },
-  // };
+  pieChar: any;
 
-  constructor(private ps: DataService, private fs: FilterService) {}
+  constructor(private ps: DataService, private fs: FilterService) {
+    this.defaultFilter = fs.filter;
+  }
 
   ngOnInit(): void {
     const ctx = document.getElementById('myChart') as HTMLCanvasElement;
@@ -62,16 +44,30 @@ export class BarChartComponent implements OnChanges {
     });
     const ctx2 = document.getElementById('pieChart') as HTMLCanvasElement;
 
-    this.pieChar =new Chart(ctx2, {
+    this.pieChar = new Chart(ctx2, {
       type: 'pie',
-      data : {
+      data: {
         labels: [],
-        datasets: []
-      }
+        datasets: [],
+      },
+    });
+    this.ps.getDataDefault().subscribe((data) => {
+      this.temp = data;
+      this.dataDefault = this.temp.summary.map((e) => e);
+      this.updateCharts();
     });
   }
 
-  ngOnChanges(): void {
+  updateStats(newStats: Stats) {
+    this.defaultFilter = newStats;
+    return this.ps.getDataDefault().subscribe((data) => {
+      this.temp2 = data;
+      this.dataDefault = this.temp2.summary.map((e) => e);
+      this.updateCharts();
+    });
+  }
+
+  updateCharts() {
     let arr = [];
     for (const key in this.fs.filter) {
       if (this.fs.filter[key] == true) {
@@ -105,26 +101,8 @@ export class BarChartComponent implements OnChanges {
       });
       this.myChart.data.datasets.push(obj);
       this.pieChar.data.datasets.push(obj);
-
     }
     this.myChart.update();
     this.pieChar.update();
   }
-
-  // initChart(chartData: any) {
-  //   Object.values(chartData).forEach(e => {
-  //     this.temp = e;
-  //     console.log(this.temp);
-  //     this.barChartData.labels.push(this.temp.province);
-  //     this.fs.filter
-  //   })
-  //   this.barChartData = {
-  //     labels :  [],
-  //     datasets : [
-  //       { label: 'Cases', data: [] },
-  //       { label: 'Deaths', data: []},
-  //       { label: 'Recover', data: [] },
-  //     ]
-  //   }
-  // }
 }

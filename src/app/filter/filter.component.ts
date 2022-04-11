@@ -52,20 +52,22 @@ export class FilterComponent implements OnInit {
     let date: string = day.toISOString().split('T')[0];
 
     this.form = new FormGroup({
-      cases: new FormControl(true),
-      cumulative_cases: new FormControl(false),
-      deaths: new FormControl(true),
-      cumulative_deaths: new FormControl(false),
-      recovered: new FormControl(true),
-      cumulative_recovered: new FormControl(false),
-      location: new FormControl('prov'),
-      startdate: new FormControl(date),
-      enddate: new FormControl(date),
+      cases: new FormControl(this.defaultFilter.cases),
+      cumulative_cases: new FormControl(this.defaultFilter.cumulative_cases),
+      deaths: new FormControl(this.defaultFilter.deaths),
+      cumulative_deaths: new FormControl(this.defaultFilter.cumulative_deaths),
+      recovered: new FormControl(this.defaultFilter.recovered),
+      cumulative_recovered: new FormControl(
+        this.defaultFilter.cumulative_recovered
+      ),
+      location: new FormControl(this.defaultFilter.location),
+      startdate: new FormControl(this.defaultFilter.startdate),
+      enddate: new FormControl(this.defaultFilter.enddate),
     });
   }
 
   saveData() {
-    // this.clicked2 = true;
+    this.clicked2 = true;
 
     let save: SaveData = new SaveData();
     save.time_save = new Date().toLocaleString();
@@ -90,6 +92,7 @@ export class FilterComponent implements OnInit {
 
     this.hs.add(save).subscribe((data) => {
       this.router.navigateByUrl('/history');
+      alert('Saved filter');
     });
   }
 

@@ -9,12 +9,10 @@ import { Stats } from '../stats.type';
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnInit {
-  // dataDefault: Array<any>;
-  // dataFederal= [];
   sortedColumn: string;
-  // @Input() defaultFilter;
-  @Input() dataDefault;
-  // @Input() dataFederal;
+  dataDefault = [];
+  d: any;
+
   defaultFilter: Stats;
 
   constructor(private ps: DataService, private fs: FilterService) {
@@ -22,7 +20,17 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.ps.getDataDefault().subscribe((data) => {
+      this.d = data;
+      this.dataDefault = this.d.summary.map((e) => e);
+    });
   }
 
-
+  updateStats(newStats: Stats) {
+    this.defaultFilter = newStats;
+    return this.ps.getDataDefault().subscribe((data) => {
+      this.d = data;
+      this.dataDefault = this.d.summary.map((e) => e);
+    });
+  }
 }
